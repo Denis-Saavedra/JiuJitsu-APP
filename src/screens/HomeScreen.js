@@ -1,21 +1,30 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import MainScreen from './MainScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+
+const Drawer = createDrawerNavigator();
 
 export default function HomeScreen({ uid, setUid }) {
+  const navigation = useNavigation();
+
   const logout = async () => {
     await AsyncStorage.removeItem('uid');
-    setUid(null); // isso faz o App.js redirecionar para Login
+    setUid(null);
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={{ marginBottom: 20 }}>Logado como UID: {uid}</Text>
-      <Button title="Sair" onPress={logout} />
-    </View>
+    <Drawer.Navigator initialRouteName="Main">
+      <Drawer.Screen name="Main" component={MainScreen} />
+      <Drawer.Screen
+        name="Sair"
+        component={MainScreen}
+        options={{ drawerLabel: 'Sair' }}
+        listeners={{
+          focus: () => logout(),
+        }}
+      />
+    </Drawer.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-});
