@@ -15,8 +15,13 @@ export default function HomeScreen({ uid, setUid }) {
   };
 
   return (
-    <Drawer.Navigator initialRouteName="Main">
-      <Drawer.Screen name="Main" component={MainScreen} />
+    <Drawer.Navigator initialRouteName="Main" screenOptions={{ unmountOnBlur: true }}>
+      <Drawer.Screen
+        name="Main"
+        component={MainScreen}
+        initialParams={{ uid }}
+      />
+      
       <Drawer.Screen
         name="Sair"
         component={MainScreen}
