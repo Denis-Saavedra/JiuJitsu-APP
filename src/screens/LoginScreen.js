@@ -40,7 +40,6 @@ export default function LoginScreen({ navigation, setUid }) {
         onChangeText={setSenha}
       />
       <Button title="Login" onPress={handleLogin} />
-      <Button title="Criar Conta" onPress={() => navigation.navigate('Register')} />
     </View>
   );
 }
