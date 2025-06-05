@@ -3,6 +3,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import MainScreen from './MainScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import RegistrarAulaScreen from './RegistrarAulaScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -21,6 +22,13 @@ export default function HomeScreen({ uid, setUid }) {
         component={MainScreen}
         initialParams={{ uid }}
       />
+
+      <Drawer.Screen
+        name="Registrar Aula"
+        component={RegistrarAulaScreen}
+        initialParams={{ uid }}
+      />
+
       
       <Drawer.Screen
         name="Sair"
@@ -30,6 +38,8 @@ export default function HomeScreen({ uid, setUid }) {
           focus: () => logout(),
         }}
       />
+
+      
     </Drawer.Navigator>
   );
 }
