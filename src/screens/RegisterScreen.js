@@ -49,8 +49,12 @@ export default function RegisterScreen({ navigation }) {
         throw new Error(typeof data === 'string' ? data : JSON.stringify(data));
       }
 
-      Alert.alert('Sucesso', 'Usuário registrado');
-      navigation.navigate('Main');
+      Alert.alert('Sucesso', 'Usuário registrado', [
+        {
+          text: 'OK',
+          onPress: () => navigation.goBack(),
+        },
+      ]);
     } catch (err) {
       Alert.alert('Erro', err.message);
     }

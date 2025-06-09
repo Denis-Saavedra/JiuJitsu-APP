@@ -4,7 +4,9 @@ import MainScreen from './MainScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import RegistrarAulaScreen from './RegistrarAulaScreen';
-import RegisterScreen from './RegisterScreen';
+import UsuariosScreen from './UsuariosScreen';
+import ContaScreen from './ContaScreen';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -36,11 +38,16 @@ export default function HomeScreen({ uid, setUid }) {
       <Drawer.Screen name="Main" component={MainScreen} initialParams={{ uid }} />
       <Drawer.Screen name="Registrar Aula" component={RegistrarAulaScreen} initialParams={{ uid }} />
       
-      {admin && (
-        <Drawer.Screen name="Registrar Usuário">
-          {(props) => <RegisterScreen {...props} />}
-        </Drawer.Screen>
-      )}
+      <Drawer.Screen
+        name={admin ? "Usuários" : "Conta"}
+        options={{ drawerLabel: admin ? "Usuários" : "Conta" }}
+      >
+        {(props) => admin
+          ? <UsuariosScreen {...props} uid={uid} />
+          : <ContaScreen {...props} uid={uid} />
+        }
+      </Drawer.Screen>
+
 
       <Drawer.Screen
         name="Sair"
